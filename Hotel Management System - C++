@@ -223,13 +223,13 @@ void Hotel::delete_rec(int rm){
 
 int main(){
 	Hotel h;
-	system("COLOR 80");	//background = 8 = gray, text = 0 = black
+	system("COLOR 84");	//background = 8 = gray, text = 4 = red
 	system("cls");
 	cout << "\n\t\t\t****************************";
 	cout << "\n\t\t\t* HOTEL MANAGEMENT SYSTEM *";
 	cout << "\n\t\t\t****************************";
 	cout << "\n\n\t\t\tZekun Wang" << "\t10\\03\\2015";
-	Sleep(1000);
+	Sleep(2000);
 	cout << "\n\n\t\t\tPress any key to continue...";
 	getch();
 	h.main_menu();
