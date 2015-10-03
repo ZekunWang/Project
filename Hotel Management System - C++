@@ -51,7 +51,11 @@ void Hotel::main_menu(){
 	}
 	cout << "\n\t\t\t\tKeep All Records(y/n): ";
 	cin >> ch;
-	if(ch == 'n') remove("Record.dat");
+	if(ch == 'n'){
+		remove("Record.dat");
+		cout << "\n\t\t\t\tRecords Cleared..." << endl;
+	}
+	cout << "Thanks for using...";
 }
 
 void Hotel::add(){
