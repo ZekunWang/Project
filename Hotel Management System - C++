@@ -55,7 +55,7 @@ void Hotel::main_menu(){
 		remove("Record.dat");
 		cout << "\n\t\t\t\tRecords Cleared..." << endl;
 	}
-	cout << "Thanks for using...";
+	cout << "\n\t\t\t\tThanks for using...";
 }
 
 void Hotel::add(){
