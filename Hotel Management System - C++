@@ -223,6 +223,7 @@ void Hotel::delete_rec(int rm){
 
 int main(){
 	Hotel h;
+	system("COLOR 80");	//background = 8 = gray, text = 0 = black
 	system("cls");
 	cout << "\n\t\t\t****************************";
 	cout << "\n\t\t\t* HOTEL MANAGEMENT SYSTEM *";
