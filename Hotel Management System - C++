@@ -1,0 +1,232 @@
+#include <iostream>
+#include <fstream>
+#include <string>		//getline();
+#include <conio.h>		//getch();
+#include <windows.h> 	//Sleep();
+using namespace std;
+
+class Hotel{
+	int room;
+	string name;
+	string address;
+	string phone;
+public:
+	void main_menu();		//display main menu
+	void add();				//book a room
+	void display();			//display customer record
+	void rooms();			//to display alloted rooms
+	void edit();			//edit customer record
+	int check(int);			//check room status
+	void modify(int);		//modify a record
+	void delete_rec(int);	//delete a record
+};
+
+void Hotel::main_menu(){
+	char ch;
+	while(ch != '5'){
+		system("cls");	//clean screen;
+		cout << "\n\t\t\t\t*************" << endl;
+		cout << "\t\t\t\t* MAIN MENU *" << endl;
+		cout << "\t\t\t\t*************" << endl;
+		cout << "\n\n\t\t\t\t1.Book A Room" << endl;
+		cout << "\t\t\t\t2.Customer Record" << endl;
+		cout << "\t\t\t\t3.Rooms Allotted" << endl;
+		cout << "\t\t\t\t4.Edit Record" << endl;
+		cout << "\t\t\t\t5.Exit" << endl;
+		cout << "\t\t\t\t";
+		cin >> ch;
+		switch(ch){
+			case '1': add();
+					break;
+			case '2': display();
+					break;
+			case '3': rooms();
+					break;
+			case '4': edit();
+			case '5': break;
+			default:cout << "\n\t\t\t\tWrong Input..." << endl;
+					cout << "\n\t\t\t\tPress any key to continue...";
+					getch();
+		}
+	}
+	cout << "\n\t\t\t\tKeep All Records(y/n): ";
+	cin >> ch;
+	if(ch == 'n') remove("Record.dat");
+}
+
+void Hotel::add(){
+	system("cls");
+	int rm;
+	ofstream fout("Record.dat", ios::app);
+	cout << "\n Enter Customer Details" << endl;
+	cout << " ----------------------" << endl;
+	cout << "\n  Room No: ";
+	cin >> rm;
+	cin.ignore();
+	if(check(rm)) cout << "\n Sorry.. Room is already booked" << endl;
+	else{
+		room = rm;
+		cout << "     Name: ";
+		getline(cin, name);
+		cout << "  Address: ";
+		getline(cin, address);
+		cout << " Phone No: ";
+		getline(cin, phone);
+		fout.write((char *)this, sizeof(Hotel));
+		cout << "\n Room is booked..." << endl;
+	}
+	cout << "\n Press any key to continue...";
+	getch();
+	fout.close();
+}
+
+void Hotel::display(){
+	system("cls");
+	ifstream fin("Record.dat", ios::in);
+	int rm;
+	bool found = false;
+	cout << "\n Enter Room No: ";
+	cin >> rm;
+	cin.ignore();
+	while(fin.read((char *)this, sizeof(Hotel))){
+		if(room == rm){
+			system("cls");
+			cout << "\n Customer Details" << endl;
+			cout << " ----------------------" << endl;
+			cout << "\n  Room No: " << room << endl;
+			cout << "     Name: " << name << endl;
+			cout << "  Address: " << address << endl;
+			cout << " Phone No: " << phone << endl;
+			found = true;
+			break;
+		}
+	}
+	if(!found) cout << "\n Room No. not found or vacant..." << endl;
+	cout << "\n Press any key to continue...";
+	getch();
+	fin.close();
+}
+
+void Hotel::rooms(){		//good
+	system("cls");
+	ifstream fin("Record.dat", ios::in);
+	cout << "\n\t\t\t\tList Of Rooms Allotted" << endl;
+	cout << "\t\t\t\t-----------------------" << endl;
+	cout << "\n Room No.\tName\t\tAddress\t\t\tPhone No." << endl;
+	while(fin.read((char *)this, sizeof(Hotel))){
+		cout << "\n   " << room << "\t\t" << name;
+		cout << "\t\t" << address << "\t" << phone << endl;
+	}
+	cout << "\n\n\t\t\t\tPress any key to continue...";
+	getch();
+	fin.close();
+}
+
+void Hotel::edit(){
+	system("cls");
+	int ch, rm;
+	cout << "\n EDIT MENU" << endl;
+	cout << " ----------" << endl;
+	cout << "\n 1.Modify Customer Record" << endl;
+	cout << " 2.Delete Customer Record" << endl;
+	cout << "\n Enter  Option: ";
+	cin >> ch;
+	cout << "\n Enter Room No: ";
+	cin >> rm;
+	cin.ignore();
+	switch(ch){
+		case 1: system("cls");
+				modify(rm);
+				break;
+		case 2: system("cls");
+				delete_rec(rm);
+				break;
+		default: cout << "\n Wrong Enter..." << endl;
+	}
+	cout << "\n Press any key to continue...";
+	getch();
+}
+
+int Hotel::check(int rm){
+	bool found(false);
+	ifstream fin("Record.dat", ios::in);
+	while(fin.read((char *)this, sizeof(Hotel))){
+		if(room == rm){
+			found = true;
+			break;
+		}
+	}
+	fin.close();
+	return found;
+}
+
+void Hotel::modify(int rm){
+	bool found(false);
+	fstream file("Record.dat", ios::in | ios::out);
+	auto pos(file.tellg());
+	while(file.read((char *)this, sizeof(Hotel))){
+		if(room == rm){
+			cout << "\n Enter New Details" << endl;
+			cout << " ------------------" << endl;
+			cout << "  Room No: " << room << endl;
+			cout << "   Record: " << name << endl;
+			cout << "     Name: ";
+			getline(cin, name);
+			cout << "   Record: " << address << endl;
+			cout << "  Address: ";
+			getline(cin, address);
+			cout << "   Record: " << phone << endl;
+			cout << " Phone No: ";
+			getline(cin, phone);
+			file.seekg(pos);
+			file.write((char *)this, sizeof(Hotel));
+			cout << "\n Record is modified..." << endl;
+			found = true;
+			break;
+		}else pos = file.tellg();
+	}
+	if(!found) cout << "\n Room no. not found or vacant..." << endl;
+	file.close();
+}
+
+void Hotel::delete_rec(int rm){
+	bool found(false);
+	char cm;
+	ifstream fin("Record.dat", ios::in);
+	ofstream fout("tmp.dat", ios::out);
+	while(fin.read((char *)this, sizeof(Hotel))){
+		if(room == rm){
+			cout << "\n Found Room Details" << endl;
+			cout << " -------------------" << endl;
+			cout << "     Name: " << name << endl;
+			cout << "  Address: " << address << endl;
+			cout << " Phone No: " << phone << endl;
+			cout << "\n Do you want to delete record(y/n): ";
+			cin >> cm;
+			found = true; 
+			if(cm == 'y') continue;
+		}
+		fout.write((char *)this, sizeof(Hotel));
+	}
+	fin.close();
+	fout.close();
+	if(!found) cout << "\nRoom no. not found or vacant..." << endl;
+	else{
+		remove("Record.dat");
+		rename("tmp.dat", "Record.dat");
+	}
+}
+
+int main(){
+	Hotel h;
+	system("cls");
+	cout << "\n\t\t\t****************************";
+	cout << "\n\t\t\t* HOTEL MANAGEMENT SYSTEM *";
+	cout << "\n\t\t\t****************************";
+	cout << "\n\n\t\t\tZekun Wang" << "\t10\\03\\2015";
+	Sleep(1000);
+	cout << "\n\n\t\t\tPress any key to continue...";
+	getch();
+	h.main_menu();
+	return 0;
+}
