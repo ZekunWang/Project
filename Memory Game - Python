@@ -3,7 +3,6 @@ http://www.codeskulptor.org/#user39_SaGdEG3g8MQ5z1q.py
 */
 
 # implementation of card game - Memory
-
 import simplegui
 import random
 
