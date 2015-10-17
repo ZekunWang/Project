@@ -1,0 +1,72 @@
+//http://www.codeskulptor.org/#user39_bPAyg8GGTDLy1ao.py
+
+# template for "Stopwatch: The Game"
+import simplegui
+
+# define global variables
+ms = 0
+ta = 0
+tb = 0
+tc = 0
+td = 0
+win = 0
+tot = 0
+time = '0:00.0'
+score = '0/0'
+
+# define helper function format that converts time
+# in tenths of seconds into formatted string A:BC.D
+def format(t):
+    global ta, tb, tc, td, time
+    td = t % 10
+    tc = (t // 10) % 10
+    tb = (t // 100) % 10
+    ta = (t // 600) % 10
+    time = str(ta) + ':' + str(tb) + str(tc) + '.' + str(td)
+    
+# define event handlers for buttons; "Start", "Stop", "Reset"
+
+def start_button_handler():
+    timer.start()
+
+def stop_button_handler():
+    global win, tot, score
+    timer.stop()
+    if not td:
+        win += 1
+    tot += 1
+    score = str(win) + '/' + str(tot)
+         
+def reset_button_handler():
+    global ms, ta, tb, tc, td, win, tot, score
+    timer.stop()
+    ms, ta, tb, tc, td, win, tot = 0,0,0,0,0,0,0
+    format(ms)
+    score = '0/0'
+    
+# define event handler for timer with 0.1 sec interval
+def timer_handler():
+    global ms
+    ms += 1
+    format(ms)
+    
+# define draw handler
+def draw(canvas):
+    canvas.draw_text(time, [100, 100], 40, "White")
+    canvas.draw_text(score, [250, 50], 30, "yellow")
+
+# create frame
+
+frame = simplegui.create_frame("Timer", 300, 200)
+
+# register event handlers
+frame.add_button("Start", start_button_handler)
+frame.add_button("Stop", stop_button_handler)
+frame.add_button("Reset", reset_button_handler)
+frame.set_draw_handler(draw)
+timer = simplegui.create_timer( 100, timer_handler)
+
+# start frame
+frame.start()
+
+# Please remember to review the grading rubric
