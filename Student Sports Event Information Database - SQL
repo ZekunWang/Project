@@ -1,0 +1,82 @@
+--Student Sports Event Information Database
+
+-- delete table
+DROP TABLE grade PURGE;
+DROP TABLE athlete PURGE;
+DROP TABLE event PURGE;
+-- create table
+CREATE TABLE athlete(
+	athleteid 	NUMBER(4),	name		VARCHAR2(20),
+	sex		VARCHAR(10),	department	VARCHAR(20),
+	CONSTRAINT pk_athleteid PRIMARY KEY(athleteid)
+);
+CREATE TABLE event(
+	eventid		VARCHAR(4),
+	eventname	VARCHAR(20)	NOT NULL,
+	location	VARCHAR(20)	NOT NULL,
+	CONSTRAINT pk_eventid PRIMARY KEY(eventid)
+);
+CREATE TABLE grade(
+	athleteid	NUMBER(4),
+	eventid		VARCHAR(4),
+	mark		NUMBER(1),
+	CONSTRAINT fk_athleteid FOREIGN KEY(athleteid)	REFERENCES athlete(athleteid) ON DELETE CASCADE,
+	CONSTRAINT fk_eventid	FOREIGN KEY(eventid)	REFERENCEs event(eventid) ON DELETE CASCADE
+);
+
+-- add test data -- athelete
+INSERT INTO athlete(athleteid,name,sex,department)
+VALUES(1001,'ming','male','computer');
+INSERT INTO athlete(athleteid,name,sex,department)
+VALUES(1002,'san','male','math');
+INSERT INTO athlete(athleteid,name,sex,department)
+VALUES(1003,'si','male','computer');
+INSERT INTO athlete(athleteid,name,sex,department)
+VALUES(1004,'er','male','physic');
+INSERT INTO athlete(athleteid,name,sex,department)
+VALUES(1005,'na','female','psychology');
+INSERT INTO athlete(athleteid,name,sex,department)
+VALUES(1006,'li','female','math');
+
+-- add event data
+INSERT INTO event(eventid,eventname,location)
+VALUES('x001','Man 5000 Meters','court 1');
+INSERT INTO event(eventid,eventname,location)
+VALUES('x002','Man Shooting','court 1');
+INSERT INTO event(eventid,eventname,location)
+VALUES('x003','Men Long Jump','court 2');
+INSERT INTO event(eventid,eventname,location)
+VALUES('x004','Women High Jump','court 2');
+INSERT INTO event(eventid,eventname,location)
+VALUES('x005','Women 3000 Meters','court 3');
+
+-- add grade data
+INSERT INTO grade(athleteid,eventid,mark)
+VALUES(1001,'x001',6);
+INSERT INTO grade(athleteid,eventid,mark)
+VALUES(1002,'x001',4);
+INSERT INTO grade(athleteid,eventid,mark)
+VALUES(1003,'x001',2);
+INSERT INTO grade(athleteid,eventid,mark)
+VALUES(1004,'x001',0);
+INSERT INTO grade(athleteid,eventid,mark)
+VALUES(1001,'x003',4);
+INSERT INTO grade(athleteid,eventid,mark)
+VALUES(1002,'x003',6);
+INSERT INTO grade(athleteid,eventid,mark)
+VALUES(1004,'x003',2);
+INSERT INTO grade(athleteid,eventid,mark)
+VALUES(1005,'x004',6);
+INSERT INTO grade(athleteid,eventid,mark)
+VALUES(1006,'x004',4);
+INSERT INTO grade(athleteid,eventid,mark)
+VALUES(1003,'x002',6);
+INSERT INTO grade(athleteid,eventid,mark)
+VALUES(1005,'x002',4);
+INSERT INTO grade(athleteid,eventid,mark)
+VALUES(1006,'x002',2);
+INSERT INTO grade(athleteid,eventid,mark)
+VALUES(1001,'x002',0);
+
+-- transaction handling
+COMMIT;
