@@ -1,5 +1,6 @@
 --Student Sports Event Information Database
 
+
 -- delete table
 DROP TABLE grade PURGE;
 DROP TABLE athlete PURGE;
