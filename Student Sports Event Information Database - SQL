@@ -1,6 +1,5 @@
 --Student Sports Event Information Database
 
-
 -- delete table
 DROP TABLE grade PURGE;
 DROP TABLE athlete PURGE;
@@ -81,3 +80,20 @@ VALUES(1001,'x002',0);
 
 -- transaction handling
 COMMIT;
+
+-- find the event name and winner in court 1
+SELECT s.name,i.eventname
+FROM grade g,(
+	SELECT eventid iid, MAX(mark) max
+	FROM grade
+	WHERE eventid IN(SELECT eventid FROM event WHERE location='court 1')
+	GROUP BY eventid) tmp,event i, athlete s
+WHERE g.eventid=tmp.iid AND g.mark=tmp.max AND
+	i.eventid=tmp.iid AND s.athleteid=g.athleteid;
+	
+-- find san's events and all competitors
+SELECT * FROM athlete WHERE athleteid IN(
+	SELECT athleteid FROM grade WHERE eventid IN(
+		SELECT eventid FROM grade WHERE athleteid=(
+			SELECT athleteid FROM athlete WHERE name='san')))
+AND name!='san';
