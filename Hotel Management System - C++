@@ -7,9 +7,9 @@ using namespace std;
 
 class Hotel{
 	int room;
-	string name;
-	string address;
-	string phone;
+	char name[20];
+	char address[40];
+	char phone[20];
 public:
 	void main_menu();		//display main menu
 	void add();				//book a room
@@ -71,11 +71,11 @@ void Hotel::add(){
 	else{
 		room = rm;
 		cout << "     Name: ";
-		getline(cin, name);
+		cin.getline(name, sizeof(name));
 		cout << "  Address: ";
-		getline(cin, address);
+		cin.getline(address, sizeof(address));
 		cout << " Phone No: ";
-		getline(cin, phone);
+		cin.getline(phone, sizeof(phone));
 		fout.write((char *)this, sizeof(Hotel));
 		cout << "\n Room is booked..." << endl;
 	}
@@ -111,7 +111,7 @@ void Hotel::display(){
 	fin.close();
 }
 
-void Hotel::rooms(){		//good
+void Hotel::rooms(){
 	system("cls");
 	ifstream fin("Record.dat", ios::in);
 	cout << "\n\t\t\t\tList Of Rooms Allotted" << endl;
@@ -175,13 +175,13 @@ void Hotel::modify(int rm){
 			cout << "  Room No: " << room << endl;
 			cout << "   Record: " << name << endl;
 			cout << "     Name: ";
-			getline(cin, name);
+			cin.getline(name, sizeof(name));
 			cout << "   Record: " << address << endl;
 			cout << "  Address: ";
-			getline(cin, address);
+			cin.getline(address, sizeof(address));
 			cout << "   Record: " << phone << endl;
 			cout << " Phone No: ";
-			getline(cin, phone);
+			cin.getline(phone, sizeof(phone));
 			file.seekg(pos);
 			file.write((char *)this, sizeof(Hotel));
 			cout << "\n Record is modified..." << endl;
