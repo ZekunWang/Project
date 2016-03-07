@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\zwang_000\AndroidStudioProjects\TicTacToe\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="686344a780033e4ba22b926cd225f8d4941247e6">
+        <dex dex="C:\Users\zwang_000\AndroidStudioProjects\TicTacToe\app\build\intermediates\pre-dexed\debug\classes-90c8181beebf2a98e6fd1b5c51a530d08c57dd9d.jar" />
+    </item>
+    <item
+        jar="C:\Users\zwang_000\AndroidStudioProjects\TicTacToe\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="95fd37732ec852e99f07eeb516a3650172f1d136">
+        <dex dex="C:\Users\zwang_000\AndroidStudioProjects\TicTacToe\app\build\intermediates\pre-dexed\debug\classes-6aa44aaa5ba84ea70ca6e9bdb35bda28e38a6473.jar" />
+    </item>
+    <item
+        jar="C:\Users\zwang_000\AndroidStudioProjects\TicTacToe\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\libs\internal_impl-21.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0">
+        <dex dex="C:\Users\zwang_000\AndroidStudioProjects\TicTacToe\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.0-f66c3810f0d3272e64e1c6345849ed04fea0416e.jar" />
+    </item>
+    <item
+        jar="C:\Users\zwang_000\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.0\support-annotations-21.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1a578b9607b36266c63d43a4fa0ab5664dbe911e">
+        <dex dex="C:\Users\zwang_000\AndroidStudioProjects\TicTacToe\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.0-fd78c76c2ce7cd97bb111dc5e9e712ab479f771d.jar" />
+    </item>
+
+</items>
